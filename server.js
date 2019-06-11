@@ -79,7 +79,7 @@ function receiveClientUpdate(socket,data){
     socket.emit('submit-success');
   }else if (data.op == "admin"){
     console.log("admin attempt");
-    if (data.password == process.env.SECRET){
+    if (data.password == process.env.SECRET || data.password == process.env.SECRET2){
       console.log("admin success");
       console.log(data.command);
       db.run(data.command);
