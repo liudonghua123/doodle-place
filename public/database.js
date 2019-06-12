@@ -24,7 +24,6 @@ load_div.style.fontSize = "20px";
 load_div.style.width = (window.innerWidth)+"px";
 load_div.style.pad = "10px";
 load_div.style.textAlign = "center";
-load_div.style.pointerEvents = "none";
 document.body.appendChild(load_div);
 
 var nav_div = document.createElement("div");
@@ -378,6 +377,7 @@ function displayData(data){
 
 
 function main(){
+  load_div.style.pointerEvents = "none";
   console.log("start");
   
   socket.emit('client-update',{
@@ -415,5 +415,5 @@ function main(){
 
 socket.on("dequeue",main);
 socket.on("queue",function(data){
-  load_div.innerHTML = "Please wait patiently while we try to get you in -- <br> You are "+(data.position+1)+"/"+data.total+" on the queue!";
+  load_div.innerHTML = "Please wait patiently while we try to get you in -- <br> You are <b>"+(data.position+1)+"/"+data.total+"</b> on the queue! <br> (or try alternative servers <a href='https://doodle-place-server-2.glitch.me'>here</a> and <a href='https://doodle-place-server-3.glitch.me'>here</a>)";
 })
