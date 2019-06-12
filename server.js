@@ -17,7 +17,7 @@ var server = app.listen(process.env.PORT || 300);
 app.use(express.static('public'));
 console.log('server running')
 
-var io = require('socket.io')(server,{pingTimeout:10000});
+var io = require('socket.io')(server,{pingTimeout:1000});
 
 // init sqlite db
 var fs = require('fs');
