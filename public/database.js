@@ -16,6 +16,17 @@ function hideFPS(){
 }
 hideFPS();
   
+var load_div = document.createElement("div");
+load_div.style.position = "absolute";
+load_div.style.left = "0px";
+load_div.style.top = (window.innerHeight/2-40)+"px";
+load_div.style.fontSize = "20px";
+load_div.style.width = (window.innerWidth)+"px";
+load_div.style.pad = "10px";
+load_div.style.textAlign = "center";
+load_div.style.pointerEvents = "none";
+document.body.appendChild(load_div);
+
 var nav_div = document.createElement("div");
 nav_div.classList.add("nav");
 nav_div.style.position = "sticky";
@@ -401,4 +412,8 @@ function main(){
   })
 }
 
-main();
+
+socket.on("dequeue",main);
+socket.on("queue",function(data){
+  load_div.innerHTML = "Please wait patiently while we try to get you in -- <br> You are "+(data.position+1)+"/"+data.total+" on the queue!";
+})
