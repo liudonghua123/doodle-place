@@ -66,7 +66,7 @@ function isvalid(data){
 }
 
 function receiveClientUpdate(socket,data){
-  if (clientServing.indexOf(socket.id) == -1){
+  if (clientServing.indexOf(socket.id) == -1 && (!data.op=="submit")){
     return;
   }
   if (data.op != "request-world" && data.op != "request-datum" && data.op != "request-world-inf"){console.log(socket.id,data.op)}

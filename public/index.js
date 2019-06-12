@@ -19,7 +19,7 @@ var LineMaterial = new THREE.LineBasicMaterial( { color: 0xffffff} );
 var Renderer = new THREE.WebGLRenderer();
 
 var Mouse = new THREE.Vector2();
-var Raycursor;
+var Raycursor = {position:[0,0,0]}
 
 var Doodles = [];
 var Terrain = {};
@@ -137,7 +137,7 @@ instruction(
 );
 
 function putDoodle(){
-  if (load_div.innerHTML.length){
+  if (READINESS < 2){
     alert(`The computer vision libraries are still being loaded. Please try again when the "Loading..." message disappears. This can take a while on mobile devices.`);
     return;
   }
