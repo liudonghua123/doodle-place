@@ -116,7 +116,7 @@ document.body.appendChild(map_canv);
 var mapbg_canv;
 
 instruction(
-  "WASD / ARROW KEYS TO NAVIGATE",
+  "WASD / ARROW KEYS TO NAGIVATE",
   function(){
     var start_frame = 300;
     return FrameCount > start_frame;
@@ -188,6 +188,7 @@ socket.on('connect', function(){
 doodleRig.checkOpenCVReady(function(){
   READINESS ++;
 })
+
 
 socket.on('world', function(data){
   for (var i = 0; i < data.length; i++){
@@ -529,11 +530,14 @@ function setup(){
     timestamp:(new Date()).toString(),
   });
   
-  
+  draw();
 }
 
-setup();
-draw();
+socket.on("dequeue",setup);
+socket.on("queue",function(data){
+  load_div.innerHTML = "Please wait patiently while we try to get you in -- <br> You are "+(data.position+1)+"/"+data.total+" on the queue!";
+})
+
 
 
 var PlayerControls = {

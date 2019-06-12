@@ -27,6 +27,9 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(dbFile);
 
 var clientCount = 0;
+var clientQueue = [];
+var CLIENT_MAX = 30;
+var clientServing = [];
 var uuidAlias = {};
 
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
@@ -63,7 +66,9 @@ function isvalid(data){
 }
 
 function receiveClientUpdate(socket,data){
-
+  if (clientServing.indexOf(socket.id) == -1){
+    return;
+  }
   if (data.op != "request-world" && data.op != "request-datum" && data.op != "request-world-inf"){console.log(socket.id,data.op)}
   if (data.op == "submit"){
     var uuid = newUUID();
@@ -127,31 +132,34 @@ function receiveClientUpdate(socket,data){
 }
 
 
-function newConnection(socket){
-  clientCount ++;
-  console.log("clientCount",clientCount);
-  
-	console.log('new connection: ' + socket.id);
-	socket.on('client-update', onClientUpdate);
-	socket.on('disconnect', onClientExit);
+var Terrain = sharedTools.terrain.generate();
+var AltTerrain = sharedTools.terrain.generateAlt();
 
-  
-	function onClientUpdate(data){
+function newConnection(socket){
+  function onClientUpdate(data){
     receiveClientUpdate(socket,data);
 	}
   
 	function onClientExit(){
     clientCount --;
+    var icq = clientQueue.indexOf(socket.id);
+    var ics = clientServing.indexOf(socket.id);
+    if (icq != -1){clientQueue.splice(icq,1);}
+    if (ics != -1){clientServing.splice(ics,1);}
     console.log(socket.id+' disconnected');
 	}
+  
+  clientCount ++;
+	console.log('new connection: ' + socket.id);
+  console.log("clientCount",clientCount);
+  
+  clientQueue.push(socket.id);
+	socket.on('client-update', onClientUpdate);
+	socket.on('disconnect', onClientExit);
 }	
 
 
 io.sockets.on('connection', newConnection);
-
-
-var Terrain = sharedTools.terrain.generate();
-var AltTerrain = sharedTools.terrain.generateAlt();
 
 var World = [];
 
@@ -302,6 +310,17 @@ function removeOverload(){
   }  
 }
 
+function dequeue(){
+  // console.log(clientServing,clientQueue);
+  while (clientServing.length < CLIENT_MAX && clientQueue.length > 0){
+    var cid = clientQueue.shift();
+    io.sockets.connected[cid].emit("dequeue");
+    clientServing.push(cid);
+  }
+  for (var i = 0; i < clientQueue.length; i++){
+    io.sockets.connected[clientQueue[i]].emit("queue",{position:i,total:clientQueue.length});
+  }
+}
 
 function updateWorld(){
   var waterlvl = 0.1
@@ -397,4 +416,5 @@ preload().then(()=>{
   initWorld()
 
   setInterval(updateWorld,10);
+  setInterval(dequeue,1000);
 })
