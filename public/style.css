@@ -187,7 +187,7 @@ input-container{
   height:13px;
   margin: var(--size-margin);
   padding:2px;
-  z-index: 100;
+  z-index: 10000;
   font-size: 11px;
   text-align: center;
 }

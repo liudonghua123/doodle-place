@@ -378,6 +378,7 @@ function displayData(data){
 
 function main(){
   load_div.style.pointerEvents = "none";
+  load_div.innerHTML=""
   console.log("start");
   
   socket.emit('client-update',{
