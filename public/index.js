@@ -475,8 +475,10 @@ function updateGeoLines(){
     for (var i = 0; i < GeoLines.length; i++){
       for (var j = 0; j < geolines_steps; j++){
         // console.log(mat[i][j].y)
-        var p = Okb.vector.lerp(GeoLines[i].geometry.vertices[j], mat[i][j],0.2)
-        GeoLines[i].geometry.vertices[j] = new THREE.Vector3(p.x,p.y,p.z);
+        try{
+          var p = Okb.vector.lerp(GeoLines[i].geometry.vertices[j], mat[i][j],0.2)
+          GeoLines[i].geometry.vertices[j] = new THREE.Vector3(p.x,p.y,p.z);
+        }catch(e){}
       }
       GeoLines[i].geometry.verticesNeedUpdate  = true
     }
