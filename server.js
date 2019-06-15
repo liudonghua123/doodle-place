@@ -165,7 +165,7 @@ var World = [];
 
 function addDoodleToWorld(doodledata,uuid,p,cluster){
   if (cluster == undefined){
-    cluster = Math.floor(Math.random()*Clusters.length); //TODO: something smarter
+    cluster = Math.floor(Math.random()*(Clusters.length-1)); //TODO: something smarter
   }
   var type = doodleSerial.acronym(doodledata.split("&")[0]);
   var doodle = {
