@@ -28,7 +28,7 @@ var db = new sqlite3.Database(dbFile);
 
 var clientCount = 0;
 var clientQueue = [];
-var CLIENT_MAX = 80;
+var CLIENT_MAX = 50;
 var clientServing = [];
 var uuidAlias = {};
 
