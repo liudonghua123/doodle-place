@@ -1,31 +1,33 @@
-Welcome to Glitch
-=================
+<html>
+  <head>
+<!--     <link rel="stylesheet" href="/style2.css"> -->
+  </head>
+  <body>
+    <h1>About <b>doodle-place</b></h1>
+    <p>
+      <b>doodle-place</b> is an online world inhabited by animate doodles. You can wander around and view doodles created by users around the globe, or contribute your own.
+    </p>
+    <p>
+      Made by <a href="https://lingdong.works">Lingdong Huang</a>. <a href="https://glitch.com/edit/#!/doodle-place">View source or remix</a> on Glitch.
+    </p>
+    <h1>Instructions</h1>
+    <p>
+      <ul>
+        <li><code>WASD</code> keys (or use on-screen game pad on touch devices) to move around.</li>
+        <li><code>N</code> key (or click <code>NEW DOODLE</code>) to add your own doodle.</li>
+      </ul>
+    </p>
+    <h1>Legal</h1>
+    <p>
+      By contributing your doodles, you agree that they enter into the public domain.
+    </p>
+    <p>
+      You also agree to not try to break this website, and that your drawings are your own creation and are appropriate.
+    </p>
+    <p>
+      We do not guarantee that your drawings will be kept.
+    </p> 
+  </body>
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+</html>
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
-
-Find out more [about Glitch](https://glitch.com/about).
-
-
-Your Project
-------------
-
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
-
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
-
-This app has a database!
-- this app uses sqlite but you can power your apps with [a number of other storage options](https://glitch.com/storage)
-- `sqlite.db` is created and put into the `.data` folder, a hidden directory whose contents aren’t copied when a project is remixed. you can see the contents of `.data` in the console under "Logs"
-
-
-Made by [Glitch](https://glitch.com/)
--------------------
-
-\ ゜o゜)ノ
